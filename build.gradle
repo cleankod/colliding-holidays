@@ -1,7 +1,10 @@
 plugins {
     id 'java'
     id 'groovy'
+    id 'pl.allegro.tech.build.axion-release' version '1.9.1'
 }
+
+version = scmVersion.version
 
 repositories {
     jcenter()
