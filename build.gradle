@@ -4,6 +4,8 @@ plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.9.1'
 }
 
+sourceCompatibility = 10
+group = 'cleankod.bs.holiday'
 version = scmVersion.version
 
 repositories {
