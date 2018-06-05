@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cleankod.bs.holiday.domain.Holiday;
 import cleankod.bs.holiday.gateway.HolidayClient;
+import cleankod.bs.holiday.gateway.domain.GetHolidaysRequest;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +28,7 @@ class HolidayController {
 
     private HolidayWrapper getHolidays() {
         return new HolidayWrapper(
-                holidayClient.holidays("PL", "2017", "06")
+                holidayClient.holidays(new GetHolidaysRequest("PL", "2017", "06"))
                         .getHolidays()
                         .stream()
                         .map(holiday -> new Holiday(holiday.getName()))

@@ -1,14 +1,11 @@
 package cleankod.bs.holiday.gateway;
 
+import cleankod.bs.holiday.gateway.domain.GetHolidaysRequest;
 import cleankod.bs.holiday.gateway.domain.HolidayWrapper;
-import feign.Param;
+import feign.QueryMap;
 import feign.RequestLine;
 
 public interface HolidayClient {
-    @RequestLine("GET /holidays?country={country}&year={year}&month={month}")
-    HolidayWrapper holidays(
-            @Param("country") String country,
-            @Param("year") String year,
-            @Param("month") String month
-    );
+    @RequestLine("GET /holidays")
+    HolidayWrapper holidays(@QueryMap GetHolidaysRequest getHolidaysRequest);
 }
