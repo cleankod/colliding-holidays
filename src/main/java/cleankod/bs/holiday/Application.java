@@ -25,6 +25,9 @@ public class Application {
                 .client(new OkHttpClient())
                 .encoder(new JacksonEncoder(mapper))
                 .decoder(new JacksonDecoder(mapper))
+                .requestInterceptor(template ->
+                        template.query("key", "99f1f2f3-51e7-4999-a88c-f0e64a91c56f")
+                )
                 .target(HolidayClient.class, "https://holidayapi.com/v1");
     }
 }

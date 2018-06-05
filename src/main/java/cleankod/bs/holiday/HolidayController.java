@@ -27,7 +27,7 @@ class HolidayController {
 
     private HolidayWrapper getHolidays() {
         return new HolidayWrapper(
-                holidayClient.holidays("99f1f2f3-51e7-4999-a88c-f0e64a91c56f", "PL", "2017", "06")
+                holidayClient.holidays("PL", "2017", "06")
                         .getHolidays()
                         .stream()
                         .map(holiday -> new Holiday(holiday.getName()))
