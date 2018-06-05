@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'groovy'
     id 'pl.allegro.tech.build.axion-release' version '1.9.1'
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
 }
 
 sourceCompatibility = 10
