@@ -6,7 +6,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.5.RELEASE'
 }
 
-sourceCompatibility = 10
+sourceCompatibility = JavaVersion.VERSION_1_10
+targetCompatibility = JavaVersion.VERSION_1_10
 group = 'cleankod.bs.holiday'
 version = scmVersion.version
 
