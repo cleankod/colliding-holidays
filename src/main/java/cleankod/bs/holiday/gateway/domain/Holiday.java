@@ -1,7 +1,5 @@
 package cleankod.bs.holiday.gateway.domain;
 
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,7 +7,4 @@ import lombok.Data;
 @Data
 public class Holiday {
     private final String name;
-    private final LocalDate date;
-    private final LocalDate observed;
-    private final Boolean isPublic;
 }
