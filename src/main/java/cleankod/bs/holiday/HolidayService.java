@@ -26,7 +26,11 @@ class HolidayService {
         return holidayClient.holidays(request)
                 .getHolidays()
                 .stream()
-                .map(holiday -> new Holiday(holiday.getName(), country))
+                .map(holiday -> convertHoliday(country, holiday))
                 .collect(Collectors.toList());
+    }
+
+    private Holiday convertHoliday(String country, cleankod.bs.holiday.gateway.domain.Holiday holiday) {
+        return new Holiday(holiday.getName(), country, holiday.getDate());
     }
 }
