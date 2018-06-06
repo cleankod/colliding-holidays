@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cleankod.bs.holiday.domain.GetHolidaysRequest;
 import cleankod.bs.holiday.domain.Holiday;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ class HolidayController {
     private final HolidayService holidayService;
 
     @GetMapping
-    public HolidayWrapper get() {
-        return new HolidayWrapper(holidayService.getHolidays());
+    public HolidayWrapper get(GetHolidaysRequest getHolidaysRequest) {
+        return new HolidayWrapper(holidayService.getHolidays(getHolidaysRequest));
     }
 
     @Data
