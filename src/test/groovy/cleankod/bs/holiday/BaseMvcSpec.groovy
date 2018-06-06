@@ -6,6 +6,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 import spock.lang.Specification
 
 @WebMvcTest
@@ -16,8 +18,11 @@ class BaseMvcSpec extends Specification {
     @Autowired
     protected ObjectMapper objectMapper
 
-    protected MockHttpServletResponse get(String uri) {
-        mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn().response
+    protected MockHttpServletResponse get(String uri, Map<String, String> params) {
+        def entries = params.findAll {key, value -> value != null}
+                .collectEntries([:]) { key, value -> [(key): [value]] }
+        MultiValueMap paramsMultiValueMap = new LinkedMultiValueMap(entries)
+        mvc.perform(MockMvcRequestBuilders.get(uri).params(paramsMultiValueMap)).andReturn().response
     }
 
     protected <T> T getResponseAs(MockHttpServletResponse response, Class<T> clazz) {
