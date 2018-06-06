@@ -5,9 +5,9 @@ import spock.lang.Unroll
 class HolidaySpec extends BaseMvcSpec {
 
     @Unroll
-    def "should return a list of holidays for #countries, #year, #month"() {
+    def "should return a list of holidays for #countries, #date"() {
         when:
-        def response = get("/holidays", [countries: countries, year: [year], month: [month]])
+        def response = get("/holidays", [countries: countries, date: [date]])
 
         then:
         response.status == 200
@@ -18,9 +18,9 @@ class HolidaySpec extends BaseMvcSpec {
         })
 
         where:
-        countries    | year   | month || names
-        ["PL"]       | "2017" | "06"  || ["Zesłanie Ducha Świętego", "Dzień Bożego Ciała"]
-        ["NO"]       | "2016" | "03"  || ["Palmesøndag", "Skjærtorsdag", "Langfredag", "2. påskedag"]
-        ["PL", "NO"] | "2016" | "03"  || ["Niedziela Wielkanocna", "Poniedziałek Wielkanocny", "Palmesøndag", "Skjærtorsdag", "Langfredag", "2. påskedag"]
+        countries    | date         || names
+        ["PL"]       | "2017-06-01" || ["Zesłanie Ducha Świętego", "Dzień Bożego Ciała"]
+        ["NO"]       | "2016-03-01" || ["Palmesøndag", "Skjærtorsdag", "Langfredag", "2. påskedag"]
+        ["PL", "NO"] | "2016-03-01" || ["Niedziela Wielkanocna", "Poniedziałek Wielkanocny", "Palmesøndag", "Skjærtorsdag", "Langfredag", "2. påskedag"]
     }
 }

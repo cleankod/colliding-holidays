@@ -1,5 +1,6 @@
 package cleankod.bs.holiday;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,9 @@ class HolidayService {
 
     private List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest, String country) {
         var request = new cleankod.bs.holiday.gateway.domain.GetHolidaysRequest(
-                country, getHolidaysRequest.getYear(), getHolidaysRequest.getMonth()
+                country,
+                String.valueOf(LocalDate.parse(getHolidaysRequest.getDate()).getYear()),
+                String.valueOf(LocalDate.parse(getHolidaysRequest.getDate()).getMonth().getValue())
         );
         return holidayClient.holidays(request)
                 .getHolidays()

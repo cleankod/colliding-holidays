@@ -9,6 +9,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class GetHolidaysRequest {
     private final List<String> countries;
-    private final String year;
-    private final String month;
+    private final String date;
 }
