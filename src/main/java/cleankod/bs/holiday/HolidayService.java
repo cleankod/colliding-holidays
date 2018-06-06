@@ -1,5 +1,6 @@
 package cleankod.bs.holiday;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,20 +14,19 @@ class HolidayService {
     private final HolidayClient holidayClient;
 
     List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest) {
-        return holidayClient.holidays(buildGetHolidaysRequest(getHolidaysRequest))
-                .getHolidays()
-                .stream()
-                .map(holiday -> new Holiday(holiday.getName()))
-                .collect(Collectors.toList());
+        return getHolidaysRequest.getCountries().stream()
+                .map(country -> getHolidays(getHolidaysRequest, country))
+                .collect(Collectors.flatMapping(Collection::stream, Collectors.toList()));
     }
 
-    private cleankod.bs.holiday.gateway.domain.GetHolidaysRequest buildGetHolidaysRequest(
-            GetHolidaysRequest getHolidaysRequest
-    ) {
-        return new cleankod.bs.holiday.gateway.domain.GetHolidaysRequest(
-                getHolidaysRequest.getCountry(),
-                getHolidaysRequest.getYear(),
-                getHolidaysRequest.getMonth()
+    private List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest, String country) {
+        var request = new cleankod.bs.holiday.gateway.domain.GetHolidaysRequest(
+                country, getHolidaysRequest.getYear(), getHolidaysRequest.getMonth()
         );
+        return holidayClient.holidays(request)
+                .getHolidays()
+                .stream()
+                .map(holiday -> new Holiday(holiday.getName(), country))
+                .collect(Collectors.toList());
     }
 }

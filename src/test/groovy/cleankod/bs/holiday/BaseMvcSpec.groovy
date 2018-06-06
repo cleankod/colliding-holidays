@@ -18,9 +18,8 @@ class BaseMvcSpec extends Specification {
     @Autowired
     protected ObjectMapper objectMapper
 
-    protected MockHttpServletResponse get(String uri, Map<String, String> params) {
-        def entries = params.findAll {key, value -> value != null}
-                .collectEntries([:]) { key, value -> [(key): [value]] }
+    protected MockHttpServletResponse get(String uri, Map<String, List<String>> params) {
+        def entries = params.findAll {key, value -> value != null && !value.empty}
         MultiValueMap paramsMultiValueMap = new LinkedMultiValueMap(entries)
         mvc.perform(MockMvcRequestBuilders.get(uri).params(paramsMultiValueMap)).andReturn().response
     }

@@ -1,12 +1,14 @@
 package cleankod.bs.holiday.domain;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
 public class GetHolidaysRequest {
-    private final String country;
+    private final List<String> countries;
     private final String year;
     private final String month;
 }
