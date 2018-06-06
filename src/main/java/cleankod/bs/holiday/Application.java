@@ -30,4 +30,9 @@ public class Application {
                 )
                 .target(HolidayClient.class, "https://holidayapi.com/v1");
     }
+
+    @Bean
+    HolidayService holidayService(HolidayClient holidayClient) {
+        return new HolidayService(holidayClient);
+    }
 }
