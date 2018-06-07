@@ -13,8 +13,7 @@ class CountrySpec extends BaseMvcSpec {
 
         and:
         with(getResponseAs(response, CountryController.CountryListWrapper)) {
-            it.countries.get(0) == 'PL'
-            it.countries.get(1) == 'NO'
+            it.countries == ['PL', 'NO']
         }
     }
 }
