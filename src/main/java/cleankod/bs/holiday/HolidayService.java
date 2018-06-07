@@ -23,8 +23,7 @@ class HolidayService {
             holidays = fetchHolidays(getHolidaysRequest, actualDate);
             actualDate = actualDate.plusDays(1L);
         }
-        while (holidays.entrySet().stream().anyMatch(stringListEntry -> stringListEntry.getValue().isEmpty())
-                        || holidays.size() < getHolidaysRequest.getCountries().size());
+        while (holidays.size() < getHolidaysRequest.getCountries().size());
 
         return holidays.entrySet().stream()
                 .map(Map.Entry::getValue)
