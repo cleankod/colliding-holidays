@@ -1,4 +1,4 @@
-package cleankod.bs.holiday;
+package cleankod.bs.holiday.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import cleankod.bs.holiday.domain.GetHolidaysRequest;
-import cleankod.bs.holiday.domain.Holiday;
-import cleankod.bs.holiday.gateway.HolidayClient;
+import cleankod.bs.holiday.core.domain.GetHolidaysRequest;
+import cleankod.bs.holiday.core.domain.Holiday;
+import cleankod.bs.holiday.client.HolidayClient;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-class HolidayService {
+public class HolidayService {
     private final HolidayClient holidayClient;
 
     List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest) {
@@ -39,7 +39,7 @@ class HolidayService {
     }
 
     private List<Holiday> getHolidays(LocalDate date, String country) {
-        var request = new cleankod.bs.holiday.gateway.domain.GetHolidaysRequest(
+        var request = new cleankod.bs.holiday.client.domain.GetHolidaysRequest(
                 country,
                 String.valueOf(date.getYear()),
                 String.valueOf(date.getMonth().getValue()),
@@ -52,7 +52,7 @@ class HolidayService {
                 .collect(Collectors.toList());
     }
 
-    private Holiday convertHoliday(String country, cleankod.bs.holiday.gateway.domain.Holiday holiday) {
+    private Holiday convertHoliday(String country, cleankod.bs.holiday.client.domain.Holiday holiday) {
         return new Holiday(holiday.getName(), country, holiday.getDate());
     }
 }

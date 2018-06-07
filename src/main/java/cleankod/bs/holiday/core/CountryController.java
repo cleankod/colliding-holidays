@@ -1,4 +1,4 @@
-package cleankod.bs.holiday;
+package cleankod.bs.holiday.core;
 
 import java.util.List;
 

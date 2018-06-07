@@ -1,4 +1,6 @@
-package cleankod.bs.holiday
+package cleankod.bs.holiday.core
+
+import cleankod.bs.holiday.BaseMvcSpec
 
 class CountrySpec extends BaseMvcSpec {
 

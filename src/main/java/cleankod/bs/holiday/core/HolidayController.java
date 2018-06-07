@@ -1,4 +1,4 @@
-package cleankod.bs.holiday;
+package cleankod.bs.holiday.core;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cleankod.bs.holiday.domain.GetHolidaysRequest;
-import cleankod.bs.holiday.domain.Holiday;
+import cleankod.bs.holiday.core.domain.GetHolidaysRequest;
+import cleankod.bs.holiday.core.domain.Holiday;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

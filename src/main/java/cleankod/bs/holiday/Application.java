@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cleankod.bs.holiday.gateway.HolidayClient;
+import cleankod.bs.holiday.core.HolidayService;
+import cleankod.bs.holiday.client.HolidayClient;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;

@@ -1,4 +1,4 @@
-package cleankod.bs.holiday.domain;
+package cleankod.bs.holiday.core.domain;
 
 import java.util.List;
 

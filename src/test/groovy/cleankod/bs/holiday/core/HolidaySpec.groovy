@@ -1,5 +1,6 @@
-package cleankod.bs.holiday
+package cleankod.bs.holiday.core
 
+import cleankod.bs.holiday.BaseMvcSpec
 import spock.lang.Unroll
 
 class HolidaySpec extends BaseMvcSpec {

@@ -1,7 +1,7 @@
-package cleankod.bs.holiday.gateway;
+package cleankod.bs.holiday.client;
 
-import cleankod.bs.holiday.gateway.domain.GetHolidaysRequest;
-import cleankod.bs.holiday.gateway.domain.HolidayWrapper;
+import cleankod.bs.holiday.client.domain.GetHolidaysRequest;
+import cleankod.bs.holiday.client.domain.HolidayWrapper;
 import feign.QueryMap;
 import feign.RequestLine;
 
