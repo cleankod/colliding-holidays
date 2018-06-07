@@ -18,12 +18,13 @@ class HolidaySpec extends BaseMvcSpec {
         })
 
         where:
-        countries    | date         || names
-        ["PL", "NO"] | "2016-03-27" || ["2. påskedag", "Poniedziałek Wielkanocny"]
-        ["PL", "NO"] | "2016-03-28" || ["2. påskedag", "Poniedziałek Wielkanocny"]
-        ["PL", "NO"] | "2016-01-01" || ["1. nyttårsdag", "Nowy Rok"]
-        ["PL", "NO"] | "2015-12-28" || ["1. nyttårsdag", "Nowy Rok"]
-        ["PL", "NO"] | "2015-12-25" || ["1. juledag", "Pierwszy dzień Bożego Narodzenia"]
-        ["PL", "NO"] | "2015-12-24" || ["1. juledag", "Pierwszy dzień Bożego Narodzenia"]
+        countries          | date         || names
+        ["PL", "NO"]       | "2016-03-27" || ["2. påskedag", "Poniedziałek Wielkanocny"]
+        ["PL", "NO"]       | "2016-03-28" || ["2. påskedag", "Poniedziałek Wielkanocny"]
+        ["PL", "NO"]       | "2016-01-01" || ["1. nyttårsdag", "Nowy Rok"]
+        ["PL", "NO"]       | "2015-12-28" || ["1. nyttårsdag", "Nowy Rok"]
+        ["PL", "NO"]       | "2015-12-25" || ["1. juledag", "Pierwszy dzień Bożego Narodzenia"]
+        ["PL", "NO"]       | "2015-12-24" || ["1. juledag", "Pierwszy dzień Bożego Narodzenia"]
+        ["PL", "NO", "US"] | "2015-12-20" || ["1. juledag", "Pierwszy dzień Bożego Narodzenia", "Christmas Day"]
     }
 }
