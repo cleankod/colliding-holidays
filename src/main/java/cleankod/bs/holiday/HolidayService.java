@@ -3,6 +3,7 @@ package cleankod.bs.holiday;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import cleankod.bs.holiday.domain.GetHolidaysRequest;
@@ -15,16 +16,35 @@ class HolidayService {
     private final HolidayClient holidayClient;
 
     List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest) {
-        return getHolidaysRequest.getCountries().stream()
-                .map(country -> getHolidays(getHolidaysRequest, country))
-                .collect(Collectors.flatMapping(Collection::stream, Collectors.toList()));
+        var givenDate = LocalDate.parse(getHolidaysRequest.getDate());
+        Map<String, List<Holiday>> holidays;
+        var actualDate = givenDate;
+        do {
+            holidays = fetchHolidays(getHolidaysRequest, actualDate);
+            actualDate = actualDate.plusDays(1L);
+        }
+        while (holidays.entrySet().stream().anyMatch(stringListEntry -> stringListEntry.getValue().isEmpty())
+                        || holidays.size() < getHolidaysRequest.getCountries().size());
+
+        return holidays.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
-    private List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest, String country) {
+    private Map<String, List<Holiday>> fetchHolidays(GetHolidaysRequest getHolidaysRequest, LocalDate actualDate) {
+        return getHolidaysRequest.getCountries().stream()
+                .map(country -> getHolidays(actualDate, country))
+                .flatMap(Collection::stream)
+                .collect(Collectors.groupingBy(Holiday::getCountry));
+    }
+
+    private List<Holiday> getHolidays(LocalDate date, String country) {
         var request = new cleankod.bs.holiday.gateway.domain.GetHolidaysRequest(
                 country,
-                String.valueOf(LocalDate.parse(getHolidaysRequest.getDate()).getYear()),
-                String.valueOf(LocalDate.parse(getHolidaysRequest.getDate()).getMonth().getValue())
+                String.valueOf(date.getYear()),
+                String.valueOf(date.getMonth().getValue()),
+                String.valueOf(date.getDayOfMonth())
         );
         return holidayClient.holidays(request)
                 .getHolidays()
