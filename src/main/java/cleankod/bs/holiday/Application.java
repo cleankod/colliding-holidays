@@ -5,10 +5,12 @@ import java.util.Arrays;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cleankod.bs.holiday.application.converter.DateTimeConverterConfiguration;
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.core.HolidayService;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
@@ -18,6 +20,7 @@ import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 
 @SpringBootApplication
+@Import(DateTimeConverterConfiguration.class)
 public class Application {
 
     public static void main(String... args) {

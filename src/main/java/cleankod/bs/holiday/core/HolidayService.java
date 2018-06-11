@@ -16,9 +16,8 @@ public class HolidayService {
     private final HolidayClient holidayClient;
 
     List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest) {
-        var givenDate = LocalDate.parse(getHolidaysRequest.getDate());
         Map<String, List<Holiday>> holidays;
-        var actualDate = givenDate;
+        var actualDate = getHolidaysRequest.getDate();
         do {
             holidays = fetchHolidays(getHolidaysRequest, actualDate);
             actualDate = actualDate.plusDays(1L);
