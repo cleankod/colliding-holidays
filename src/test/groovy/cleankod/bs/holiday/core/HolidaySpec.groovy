@@ -47,4 +47,25 @@ class HolidaySpec extends BaseMvcSpec {
             fieldError.rejectedValue == givenCountries
         }
     }
+
+    @Unroll
+    def "should not return since unsupported date #givenDate"() {
+        when:
+        def response = get("/holidays", [countries: ["PL"], date: [givenDate]])
+
+        then:
+        response.status == 422
+        with(getResponseAs(response, ErrorResponse)) {
+            it.id.length() == 16
+            def fieldError = it.fieldErrors.get(0)
+            fieldError.field == "date"
+            fieldError.code == "{validation.unsupported-date}"
+            fieldError.rejectedValue == givenDate
+        }
+
+        where:
+        givenDate << [
+                "2019-01-01", "2018-07-01", "2018-06-11", "2018-06-10", "2018-06-01"
+        ]
+    }
 }

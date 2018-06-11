@@ -1,10 +1,12 @@
 package cleankod.bs.holiday;
 
+import java.time.Clock;
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,5 +48,16 @@ public class Application {
         return new SupportedCountriesWrapper(
                 Arrays.asList(environment.getRequiredProperty("application.supported-countries", String[].class))
         );
+    }
+
+    @Bean
+    boolean onlyPastSupported(Environment environment) {
+        return environment.getRequiredProperty("application.only-past-supported", Boolean.class);
+    }
+
+    @Bean
+    @Profile("!test")
+    Clock clock() {
+        return Clock.systemDefaultZone();
     }
 }

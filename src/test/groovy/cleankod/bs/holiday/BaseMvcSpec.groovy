@@ -3,14 +3,22 @@ package cleankod.bs.holiday
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Profile
 import org.springframework.mock.web.MockHttpServletResponse
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import spock.lang.Specification
 
+import java.time.Clock
+import java.time.Instant
+import java.time.ZoneId
+
 @WebMvcTest
+@ActiveProfiles("test")
 class BaseMvcSpec extends Specification {
     @Autowired
     protected MockMvc mvc
@@ -30,5 +38,16 @@ class BaseMvcSpec extends Specification {
 
     protected <T> T getResponseAs(MockHttpServletResponse response, Class<T> clazz) {
         objectMapper.readValue(response.contentAsString, clazz)
+    }
+
+    static class TestContextConfiguration {
+        public static final Instant FIXED_NOW = Instant.parse("2018-06-11T12:48:55Z")
+        public static final ZoneId FIXED_ZONE = ZoneId.of("UTC")
+
+        @Bean
+        @Profile("test")
+        Clock clock() {
+            return Clock.fixed(FIXED_NOW, FIXED_ZONE)
+        }
     }
 }

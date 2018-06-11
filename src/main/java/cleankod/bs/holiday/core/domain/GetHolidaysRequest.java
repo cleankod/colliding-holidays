@@ -11,5 +11,6 @@ import lombok.RequiredArgsConstructor;
 public class GetHolidaysRequest {
     @SupportedCountries
     private final List<String> countries;
+    @SupportedDate
     private final LocalDate date;
 }
