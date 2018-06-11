@@ -1,7 +1,6 @@
 package cleankod.bs.holiday.application.error
 
 import cleankod.bs.holiday.BaseMvcSpec
-import cleankod.bs.holiday.application.error.Error
 
 class ErrorHandlingSpec extends BaseMvcSpec {
     def "should handle exception"() {
@@ -13,9 +12,9 @@ class ErrorHandlingSpec extends BaseMvcSpec {
 
         then:
         response.status == actualStatus
-        with(getResponseAs(response, Error)) {
+        with(getResponseAs(response, ErrorResponse)) {
             it.id.length() == 16
-            it.message == message
+            it.globalErrors.get(0).message == message
         }
 
         where:

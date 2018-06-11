@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public class GetHolidaysRequest {
+    @SupportedCountries
     private final List<String> countries;
     private final String date;
 }

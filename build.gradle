@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-validation'
     compile 'io.github.openfeign:feign-core:9.7.0'
     compile 'io.github.openfeign:feign-okhttp:9.7.0'
     compile 'io.github.openfeign:feign-jackson:9.7.0'

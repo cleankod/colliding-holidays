@@ -2,6 +2,8 @@ package cleankod.bs.holiday.core;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ class HolidayController {
     private final HolidayService holidayService;
 
     @GetMapping
-    public HolidayWrapper get(GetHolidaysRequest getHolidaysRequest) {
+    public HolidayWrapper get(@Valid GetHolidaysRequest getHolidaysRequest) {
         return new HolidayWrapper(holidayService.getHolidays(getHolidaysRequest));
     }
 

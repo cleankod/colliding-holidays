@@ -1,6 +1,7 @@
 package cleankod.bs.holiday.core
 
 import cleankod.bs.holiday.BaseMvcSpec
+import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper
 
 class CountrySpec extends BaseMvcSpec {
 
@@ -12,8 +13,8 @@ class CountrySpec extends BaseMvcSpec {
         response.status == 200
 
         and:
-        with(getResponseAs(response, CountryController.CountryListWrapper)) {
-            it.countries == ['PL', 'NO']
+        with(getResponseAs(response, SupportedCountriesWrapper)) {
+            it.countries == ['PL', 'NO', 'US']
         }
     }
 }
