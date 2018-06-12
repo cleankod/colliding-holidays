@@ -48,7 +48,7 @@ public class Application {
 
     @Bean
     boolean onlyPastSupported(ApplicationProperties applicationProperties) {
-        return applicationProperties.isOnlyPastSupported();
+        return applicationProperties.getOnlyPastSupported();
     }
 
     @Bean
