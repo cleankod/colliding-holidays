@@ -17,6 +17,7 @@ import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
 import cleankod.bs.holiday.core.HolidayService;
+import cleankod.bs.holiday.core.HolidayServiceFactory;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 
 @SpringBootApplication
@@ -36,7 +37,7 @@ public class Application {
 
     @Bean
     HolidayService holidayService(HolidayClient holidayClient) {
-        return new HolidayService(holidayClient);
+        return HolidayServiceFactory.getInstance(holidayClient);
     }
 
     @Bean
