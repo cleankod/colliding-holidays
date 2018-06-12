@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
+import cleankod.bs.holiday.client.domain.ApiKey;
+import cleankod.bs.holiday.client.domain.BaseUrl;
 import cleankod.bs.holiday.core.HolidayService;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 
@@ -24,8 +26,10 @@ public class Application {
     }
 
     @Bean
-    HolidayClient holidayClient(ObjectMapper mapper) {
-        return HolidayClientFactory.getInstance(mapper);
+    HolidayClient holidayClient(Environment environment, ObjectMapper mapper) {
+        ApiKey apiKey = new ApiKey(environment.getRequiredProperty("application.holiday-api-key"));
+        BaseUrl baseUrl = new BaseUrl(environment.getRequiredProperty("application.holiday-api-base-url"));
+        return HolidayClientFactory.getInstance(apiKey, baseUrl, mapper);
     }
 
     @Bean
