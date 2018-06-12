@@ -1,0 +1,9 @@
+import org.apache.tools.ant.filters.*
+
+processResources {
+    filesMatching('**/*.properties') {
+        filter ReplaceTokens, tokens: [
+                "application.version": project.version
+        ]
+    }
+}
