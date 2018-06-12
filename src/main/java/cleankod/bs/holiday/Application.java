@@ -6,11 +6,12 @@ import java.util.Arrays;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cleankod.bs.holiday.application.configuration.ApplicationProperties;
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
@@ -19,6 +20,7 @@ import cleankod.bs.holiday.core.HolidayService;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 
 @SpringBootApplication
+@Import({ApplicationProperties.class})
 public class Application {
 
     public static void main(String... args) {
@@ -26,9 +28,9 @@ public class Application {
     }
 
     @Bean
-    HolidayClient holidayClient(Environment environment, ObjectMapper mapper) {
-        ApiKey apiKey = new ApiKey(environment.getRequiredProperty("application.holiday-api-key"));
-        BaseUrl baseUrl = new BaseUrl(environment.getRequiredProperty("application.holiday-api-base-url"));
+    HolidayClient holidayClient(ApplicationProperties applicationProperties, ObjectMapper mapper) {
+        ApiKey apiKey = new ApiKey(applicationProperties.getHolidayApi().getKey());
+        BaseUrl baseUrl = new BaseUrl(applicationProperties.getHolidayApi().getBaseUrl());
         return HolidayClientFactory.getInstance(apiKey, baseUrl, mapper);
     }
 
@@ -38,15 +40,15 @@ public class Application {
     }
 
     @Bean
-    SupportedCountriesWrapper supportedCountriesWrapper(Environment environment) {
+    SupportedCountriesWrapper supportedCountriesWrapper(ApplicationProperties applicationProperties) {
         return new SupportedCountriesWrapper(
-                Arrays.asList(environment.getRequiredProperty("application.supported-countries", String[].class))
+                Arrays.asList(applicationProperties.getSupportedCountries())
         );
     }
 
     @Bean
-    boolean onlyPastSupported(Environment environment) {
-        return environment.getRequiredProperty("application.only-past-supported", Boolean.class);
+    boolean onlyPastSupported(ApplicationProperties applicationProperties) {
+        return applicationProperties.isOnlyPastSupported();
     }
 
     @Bean
