@@ -11,17 +11,19 @@ import org.springframework.context.annotation.Profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cleankod.bs.holiday.application.cache.CacheConfiguration;
 import cleankod.bs.holiday.application.configuration.ApplicationProperties;
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
+import cleankod.bs.holiday.core.HolidayForSingleCountryFetcher;
 import cleankod.bs.holiday.core.HolidayService;
 import cleankod.bs.holiday.core.HolidayServiceFactory;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 
 @SpringBootApplication
-@Import({ApplicationProperties.class})
+@Import({ApplicationProperties.class, CacheConfiguration.class})
 public class Application {
 
     public static void main(String... args) {
@@ -36,8 +38,13 @@ public class Application {
     }
 
     @Bean
-    HolidayService holidayService(HolidayClient holidayClient) {
-        return HolidayServiceFactory.getInstance(holidayClient);
+    HolidayForSingleCountryFetcher holidayForSingleCountryFetcher(HolidayClient holidayClient) {
+        return new HolidayForSingleCountryFetcher(holidayClient);
+    }
+
+    @Bean
+    HolidayService holidayService(HolidayForSingleCountryFetcher holidayForSingleCountryFetcher) {
+        return HolidayServiceFactory.getInstance(holidayForSingleCountryFetcher);
     }
 
     @Bean
