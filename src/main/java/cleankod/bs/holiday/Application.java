@@ -12,12 +12,9 @@ import org.springframework.core.env.Environment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cleankod.bs.holiday.client.HolidayClient;
+import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.core.HolidayService;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
-import feign.Feign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
-import feign.okhttp.OkHttpClient;
 
 @SpringBootApplication
 public class Application {
@@ -28,14 +25,7 @@ public class Application {
 
     @Bean
     HolidayClient holidayClient(ObjectMapper mapper) {
-        return Feign.builder()
-                .client(new OkHttpClient())
-                .encoder(new JacksonEncoder(mapper))
-                .decoder(new JacksonDecoder(mapper))
-                .requestInterceptor(template ->
-                        template.query("key", "99f1f2f3-51e7-4999-a88c-f0e64a91c56f")
-                )
-                .target(HolidayClient.class, "https://holidayapi.com/v1");
+        return HolidayClientFactory.getInstance(mapper);
     }
 
     @Bean

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import cleankod.bs.holiday.client.exception.HolidayClientException;
 import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
@@ -22,11 +23,22 @@ public class ErrorHandling extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+    @ExceptionHandler(HolidayClientException.class)
+    public final ResponseEntity<ErrorResponse> handleHolidayClientException(HolidayClientException ex) {
+        ErrorResponse errorResponse = getSingleGlobalErrorResponse(ex.getMessage());
+        log.warn("Holiday client error. Message: {}, errorId: {}.", ex.getMessage(), errorResponse.getId());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(ex.getStatus()));
+    }
+
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorResponse> handleUnknownException(Exception ex) {
-        GlobalError globalError = new GlobalError(ex.getMessage());
-        ErrorResponse errorResponse = new ErrorResponse(globalError);
-        log.error("Unknown error. Message: {}, errorId: {}.", globalError.getMessage(), errorResponse.getId(), ex);
+        ErrorResponse errorResponse = getSingleGlobalErrorResponse(ex.getMessage());
+        log.error("Unknown error. Message: {}, errorId: {}.", ex.getMessage(), errorResponse.getId(), ex);
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ErrorResponse getSingleGlobalErrorResponse(String message) {
+        GlobalError globalError = new GlobalError(message);
+        return new ErrorResponse(globalError);
     }
 }
