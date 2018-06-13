@@ -1,0 +1,11 @@
+{
+  "status": 200,
+  "holidays": [
+    {
+      "name": "Pierwszy dzień Bożego Narodzenia",
+      "date": "2015-12-25",
+      "observed": "2015-12-25",
+      "public": true
+    }
+  ]
+}

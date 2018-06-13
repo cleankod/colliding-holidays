@@ -1,0 +1,11 @@
+{
+  "status": 200,
+  "holidays": [
+    {
+      "name": "1. nyttårsdag",
+      "date": "2016-01-01",
+      "observed": "2016-01-01",
+      "public": true
+    }
+  ]
+}

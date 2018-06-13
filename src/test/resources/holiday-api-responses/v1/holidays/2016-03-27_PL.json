@@ -1,0 +1,11 @@
+{
+  "status": 200,
+  "holidays": [
+    {
+      "name": "Niedziela Wielkanocna",
+      "date": "2016-03-27",
+      "observed": "2016-03-27",
+      "public": true
+    }
+  ]
+}
