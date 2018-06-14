@@ -48,7 +48,7 @@ class BaseMvcSpec extends Specification {
 
         @Bean
         Jadler holidayApiServerMock() {
-            return HolidayClientMockFactory.getInstance()
+            return HolidayClientMockFactory.create()
         }
 
         @Bean

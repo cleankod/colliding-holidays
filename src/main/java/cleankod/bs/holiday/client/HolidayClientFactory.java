@@ -13,7 +13,7 @@ import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 
 public class HolidayClientFactory {
-    public static HolidayClient getInstance(ApiKey apiKey, BaseUrl baseUrl, ObjectMapper mapper) {
+    public static HolidayClient create(ApiKey apiKey, BaseUrl baseUrl, ObjectMapper mapper) {
         JacksonDecoder decoder = new JacksonDecoder(mapper);
         return Feign.builder()
                 .client(new OkHttpClient())

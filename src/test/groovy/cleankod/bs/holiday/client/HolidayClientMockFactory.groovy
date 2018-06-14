@@ -9,7 +9,7 @@ import java.nio.charset.Charset
 
 class HolidayClientMockFactory {
 
-    static Jadler getInstance() {
+    static Jadler create() {
         Jadler.initJadlerUsing(new JdkStubHttpServer(9090))
 
         def holidaysResponder = { Request request ->

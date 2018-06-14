@@ -35,7 +35,7 @@ public class Application {
     HolidayClient holidayClient(ApplicationProperties applicationProperties, ObjectMapper mapper) {
         ApiKey apiKey = new ApiKey(applicationProperties.getHolidayApi().getKey());
         BaseUrl baseUrl = new BaseUrl(applicationProperties.getHolidayApi().getBaseUrl());
-        return HolidayClientFactory.getInstance(apiKey, baseUrl, mapper);
+        return HolidayClientFactory.create(apiKey, baseUrl, mapper);
     }
 
     @Bean
@@ -45,7 +45,7 @@ public class Application {
 
     @Bean
     HolidayService holidayService(HolidayForSingleCountryFetcher holidayForSingleCountryFetcher) {
-        return HolidayServiceFactory.getInstance(holidayForSingleCountryFetcher);
+        return HolidayServiceFactory.create(holidayForSingleCountryFetcher);
     }
 
     @Bean
