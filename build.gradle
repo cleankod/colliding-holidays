@@ -37,3 +37,8 @@ dependencies {
     testCompile 'net.jadler:jadler-core:1.3.0'
     testCompile 'net.jadler:jadler-jdk:1.3.0'
 }
+
+bootJar {
+    // Make the resulting artifact an executable file:
+    launchScript()
+}
