@@ -8,8 +8,7 @@ import org.springframework.validation.BindingResult;
 
 class BindExceptionToErrorResponseConverter {
     static ErrorResponse getErrorResponse(BindException ex) {
-        BindingResult bindingResult = ex
-                .getBindingResult();
+        BindingResult bindingResult = ex.getBindingResult();
 
         List<FieldError> fieldErrors = bindingResult
                 .getFieldErrors()
@@ -24,9 +23,7 @@ class BindExceptionToErrorResponseConverter {
         List<GlobalError> globalErrors = bindingResult
                 .getGlobalErrors()
                 .stream()
-                .map(globalError -> new GlobalError(
-                        globalError.getCode())
-                )
+                .map(globalError -> new GlobalError(globalError.getCode()))
                 .collect(Collectors.toList());
 
         return new ErrorResponse(fieldErrors, globalErrors);
