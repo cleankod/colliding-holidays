@@ -1,6 +1,7 @@
 # Colliding holidays API
 
 [![Build Status](https://travis-ci.org/cleankod/colliding-holidays.svg?branch=master)](https://travis-ci.org/cleankod/colliding-holidays)
+[![codecov](https://codecov.io/gh/cleankod/colliding-holidays/branch/master/graph/badge.svg)](https://codecov.io/gh/cleankod/colliding-holidays)
 
 ## About
 A simple web application for finding next colliding holidays for given countries and date.
