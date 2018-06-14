@@ -3,7 +3,7 @@
 ## About
 A simple web application for finding next colliding holidays for given countries and date.
 
-It uses the [Holiday API] underneath.
+It uses the [Holiday API](1) underneath.
 
 ## Getting started
 These instructions will get the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. 
@@ -34,9 +34,9 @@ build/libs/bs-holidays.jar
 
 ## Configuration
 * `application.supported-countries` - coma separated list of countries supported for colliding holidays lookup.
-* `application.holiday-api.key` - an API key value for the [Holiday API].
-* `application.holiday-api.base-url` - base URL for the [Holiday API].
-* `application.only-past-supported` - a `boolean` value that states whether only past dates are supported. Keep in mind though, that when set to `true` the Premium account key for the [Holiday API] has to be provided. Otherwise the application will issue an error on each request when present or future dates are given. When set to `false` the application will only allow dates one month before the current one. 
+* `application.holiday-api.key` - an API key value for the [Holiday API](1).
+* `application.holiday-api.base-url` - base URL for the [Holiday API](1).
+* `application.only-past-supported` - a `boolean` value that states whether only past dates are supported. Keep in mind though, that when set to `true` the Premium account key for the [Holiday API](1) has to be provided. Otherwise the application will issue an error on each request when present or future dates are given. When set to `false` the application will only allow dates one month before the current one. 
 
 ## Monitoring
 As for the HTTP endpoints, monitoring runs on a different port (8081) for security purposes.
@@ -51,7 +51,7 @@ Each request causes the `correlationId` to be generated and added to each logged
 
 By default, the application logs into three files:
 * `web-trace.log` - all requests made to the API
-* `holiday-client-requests-trace.log` - all requests made to the [Holiday API]
+* `holiday-client-requests-trace.log` - all requests made to the [Holiday API](1)
 * `application.log` - application specific logs 
 
 ## Built with
@@ -74,9 +74,9 @@ Wherever possible, no Spring-specific stuff was used inside of actual modules (i
 ### Package-scoped classes
 Package scoped access is used whenever possible to encapsulate the internal classes of a module. There is only one exception to this rule - the component with cached results. It has to be wrapped in a AOP-proxy in order to enable caching in a painless way. It has to be therefore declared public in order to enable its construction in the main application class.
 ### Mocking Holiday API in tests
-In order not to stress the actual [Holiday API] servers, the mocked responses are used for white-box testing. It also makes the tests complete faster.
+In order not to stress the actual [Holiday API](1) servers, the mocked responses are used for white-box testing. It also makes the tests complete faster.
 ### Caching Holiday API results
-Some given parameters may stress the [Holiday API] servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used. 
+Some given parameters may stress the [Holiday API](1) servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used. 
 
 ## TODO
 There are few thing still pending for improvement:
@@ -84,4 +84,4 @@ There are few thing still pending for improvement:
 - [ ] the code for finding colliding holidays is kinda procedural
 - [ ] provide a documentation fot the API ([OpenAPI](https://swagger.io/docs/specification/about/) or [JSON-doc](http://jsondoc.org/)).
 
-[Holiday API]:(https://holidayapi.com/)
+[1]:(https://holidayapi.com/)
