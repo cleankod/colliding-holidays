@@ -6,7 +6,7 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 public class LoggingConfiguration {
-    @Bean
+    @Bean(destroyMethod = "destroy")
     TraceIdFilter traceIdFilter() {
         return new TraceIdFilter();
     }
