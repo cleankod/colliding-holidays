@@ -1,4 +1,4 @@
-package cleankod.bs.holiday.application.configuration;
+package cleankod.bs.holiday.application.properties;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

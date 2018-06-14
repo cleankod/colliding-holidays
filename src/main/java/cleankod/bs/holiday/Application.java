@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cleankod.bs.holiday.application.cache.CacheConfiguration;
-import cleankod.bs.holiday.application.configuration.ApplicationProperties;
+import cleankod.bs.holiday.application.properties.ApplicationProperties;
 import cleankod.bs.holiday.application.log.LoggingConfiguration;
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
