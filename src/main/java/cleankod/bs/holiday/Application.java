@@ -8,11 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cleankod.bs.holiday.application.cache.CacheConfiguration;
 import cleankod.bs.holiday.application.configuration.ApplicationProperties;
+import cleankod.bs.holiday.application.log.TraceIdFilter;
 import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
@@ -63,5 +65,20 @@ public class Application {
     @Profile("!test")
     Clock clock() {
         return Clock.systemDefaultZone();
+    }
+
+    @Bean
+    TraceIdFilter traceIdFilter() {
+        return new TraceIdFilter();
+    }
+
+    @Bean
+    public CommonsRequestLoggingFilter logFilter() {
+        CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000);
+        filter.setIncludeHeaders(true);
+        return filter;
     }
 }
