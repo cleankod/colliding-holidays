@@ -38,6 +38,46 @@ build/libs/bs-holidays.jar
 * `application.holiday-api.base-url` - base URL for the [Holiday API](https://holidayapi.com/).
 * `application.only-past-supported` - a `boolean` value that states whether only past dates are supported. Keep in mind though, that when set to `true` the Premium account key for the [Holiday API](https://holidayapi.com/) has to be provided. Otherwise the application will issue an error on each request when present or future dates are given. When set to `false` the application will only allow dates one month before the current one. 
 
+## API usage
+### Get colliding holidays
+Endpoint:
+* `GET /holidays`
+
+Parameters:
+* `date` (**required**) - start the lookup from this day on
+* `countries` (**required**) - look for holidays in these countries (one or more, as long as they are supported by the application)
+
+Sample request:
+```
+http://localhost:8080/holidays?date=2017-12-03&countries=PL&countries=NO
+```
+
+Will produce:
+```json
+{
+    "holidays": [
+        {
+            "country": "NO",
+            "date": "2017-12-25",
+            "name": "1. juledag"
+        },
+        {
+            "country": "PL",
+            "date": "2017-12-25",
+            "name": "Pierwszy dzień Bożego Narodzenia"
+        }
+    ]
+}
+```
+
+Which means that starting from `2017-12-03` the first colliding holiday for Poland and Norway is on `2017-12-25`.
+
+### Get supported countries
+Endpoint:
+* `GET /countries`
+
+Returns a list of countries supported by the application.
+
 ## Monitoring
 As for the HTTP endpoints, monitoring runs on a different port (8081) for security purposes.
 Some endpoints to try out:
