@@ -26,6 +26,7 @@ dependencies {
     compile 'io.github.openfeign:feign-core:9.7.0'
     compile 'io.github.openfeign:feign-okhttp:9.7.0'
     compile 'io.github.openfeign:feign-jackson:9.7.0'
+    compile 'io.github.openfeign:feign-slf4j:9.7.0'
     compile 'io.github.openfeign:feign-annotation-error-decoder:1.0.3'
     compile 'javax.cache:cache-api:1.1.0'
     compile 'com.hazelcast:hazelcast:3.10.2'

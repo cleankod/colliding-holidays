@@ -12,7 +12,7 @@ import javax.servlet.ServletResponse;
 
 import org.slf4j.MDC;
 
-public class TraceIdFilter implements Filter {
+class TraceIdFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {}
 

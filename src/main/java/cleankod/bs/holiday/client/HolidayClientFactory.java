@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
 import feign.Feign;
+import feign.Logger;
 import feign.error.AnnotationErrorDecoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
+import feign.slf4j.Slf4jLogger;
 
 public class HolidayClientFactory {
     public static HolidayClient getInstance(ApiKey apiKey, BaseUrl baseUrl, ObjectMapper mapper) {
@@ -17,6 +19,8 @@ public class HolidayClientFactory {
                 .client(new OkHttpClient())
                 .encoder(new JacksonEncoder(mapper))
                 .decoder(decoder)
+                .logger(new Slf4jLogger(HolidayClient.class))
+                .logLevel(Logger.Level.FULL)
                 .requestInterceptor(template ->
                         template.query("key", apiKey.getValue())
                 )
