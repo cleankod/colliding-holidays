@@ -6,7 +6,7 @@ A simple web application for finding next colliding holidays for given countries
 It uses the [Holiday API](https://holidayapi.com/) underneath.
 
 ## Getting started
-These instructions will get the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. 
+These instructions will get the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 Project requires **Java 10** to run and JDK 10 with Gradle to build.
@@ -22,11 +22,11 @@ gradle build
 ```bash
 gradle bootRun
 ```
-### Using JAR
+#### Using JAR
 ```bash
 java -jar build/libs/bs-holidays.jar
 ```
-### Using executable JAR
+#### Using executable JAR
 The resulting artifact is an executable file so it can be run like any other binary or script file:
 ```bash
 build/libs/bs-holidays.jar
@@ -87,7 +87,7 @@ Some endpoints to try out:
 For more information about configuration and a complete list of endpoints, please refer to [this guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints).
 
 ## Logging
-Each request causes the `correlationId` to be generated and added to each logged line caused by such request. This eases looking for potential problems in the application. The `correlationId` can be found at the begging of each log line. If the value `[none]` is present it simply means that the log entry was not caused by the API request.
+Each API request causes the `correlationId` to be generated and added to all log lines initiated by such request. This eases looking for potential problems in the application. The `correlationId` can be found at the begging of each log line. If the value `[none]` is present it simply means that the log entry was not caused by the API request.
 
 By default, the application logs into three files:
 * `web-trace.log` - all requests made to the API
@@ -95,7 +95,7 @@ By default, the application logs into three files:
 * `application.log` - application specific logs 
 
 ## Built with
-* [Spring Boot](https://spring.io/projects/spring-boot) - The web framework used
+* [Spring Boot](https://spring.io/projects/spring-boot) - The web framework
 * [Gradle](https://gradle.org/) - Dependency Management and build tool
 * [Feign](https://github.com/OpenFeign/feign) - Java HTTP client binder
 * [Hazelcast](https://hazelcast.com/) - Cache manager
@@ -119,7 +119,7 @@ In order not to stress the actual [Holiday API](https://holidayapi.com/) servers
 Some given parameters may stress the [Holiday API](https://holidayapi.com/) servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used. 
 
 ## TODO
-There are few thing still pending for improvement:
+There are few things still pending for improvement:
 - [ ] the holiday fetching logic may be looking for whole months instead of day-by-day requests, and then find colliding holidays in such results
-- [ ] the code for finding colliding holidays is kinda procedural
+- [ ] the code for finding colliding holidays is too procedural
 - [ ] provide a documentation fot the API ([OpenAPI](https://swagger.io/docs/specification/about/) or [JSON-doc](http://jsondoc.org/)).
