@@ -2,6 +2,7 @@ package cleankod.bs.holiday.core
 
 import cleankod.bs.holiday.BaseMvcSpec
 import cleankod.bs.holiday.application.error.ErrorResponse
+import cleankod.bs.holiday.application.error.FieldError
 import spock.lang.Unroll
 
 class HolidaySpec extends BaseMvcSpec {
@@ -77,14 +78,10 @@ class HolidaySpec extends BaseMvcSpec {
         response.status == 422
         with(getResponseAs(response, ErrorResponse)) {
             it.id.length() == 16
-            def firstFieldError = it.fieldErrors.get(0)
-            firstFieldError.field == "date"
-            firstFieldError.code == "{validation.date-required}"
-            firstFieldError.rejectedValue == null
-            def secondFieldError = it.fieldErrors.get(1)
-            secondFieldError.field == "countries"
-            secondFieldError.code == "{validation.countries-required}"
-            secondFieldError.rejectedValue == null
+            it.fieldErrors.containsAll(
+                    new FieldError("date", "{validation.date-required}", null),
+                    new FieldError("countries", "{validation.countries-required}", null)
+            )
         }
     }
 }
