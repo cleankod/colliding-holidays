@@ -42,10 +42,10 @@ class HolidaySpec extends BaseMvcSpec {
         response.status == 422
         with(getResponseAs(response, ErrorResponse)) {
             it.id.length() == 16
-            def fieldError = it.fieldErrors.get(0)
-            fieldError.field == "countries"
-            fieldError.code == "{validation.unsupported-countries}"
-            fieldError.rejectedValue == givenCountries
+            it.fieldErrors.size == 1
+            it.fieldErrors.contains(
+                    new FieldError("countries", "{validation.unsupported-countries}", givenCountries)
+            )
         }
     }
 
@@ -58,10 +58,8 @@ class HolidaySpec extends BaseMvcSpec {
         response.status == 422
         with(getResponseAs(response, ErrorResponse)) {
             it.id.length() == 16
-            def fieldError = it.fieldErrors.get(0)
-            fieldError.field == "date"
-            fieldError.code == "{validation.unsupported-date}"
-            fieldError.rejectedValue == givenDate
+            it.fieldErrors.size == 1
+            it.fieldErrors.contains(new FieldError("date", "{validation.unsupported-date}", givenDate))
         }
 
         where:
