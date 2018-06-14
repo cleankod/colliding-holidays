@@ -68,4 +68,23 @@ class HolidaySpec extends BaseMvcSpec {
                 "2019-01-01", "2018-07-01", "2018-06-11", "2018-06-10", "2018-06-01"
         ]
     }
+
+    def "should not return since required parameters not given"() {
+        when:
+        def response = get("/holidays")
+
+        then:
+        response.status == 422
+        with(getResponseAs(response, ErrorResponse)) {
+            it.id.length() == 16
+            def firstFieldError = it.fieldErrors.get(0)
+            firstFieldError.field == "date"
+            firstFieldError.code == "{validation.date-required}"
+            firstFieldError.rejectedValue == null
+            def secondFieldError = it.fieldErrors.get(1)
+            secondFieldError.field == "countries"
+            secondFieldError.code == "{validation.countries-required}"
+            secondFieldError.rejectedValue == null
+        }
+    }
 }
