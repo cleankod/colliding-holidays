@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cleankod.bs.holiday.core.domain.GetHolidaysRequest;
+import cleankod.bs.holiday.core.domain.GetCollidingHolidaysRequest;
 import cleankod.bs.holiday.core.domain.Holiday;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +19,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 class HolidayController {
 
-    private final HolidayService holidayService;
+    private final CollidingHolidayService collidingHolidayService;
 
     @GetMapping
-    public HolidayWrapper get(@Valid GetHolidaysRequest getHolidaysRequest) {
-        return new HolidayWrapper(holidayService.getHolidays(getHolidaysRequest));
+    public HolidayWrapper get(@Valid GetCollidingHolidaysRequest getCollidingHolidaysRequest) {
+        return new HolidayWrapper(collidingHolidayService.getHolidaysOnTheSameDayInAllCountries(getCollidingHolidaysRequest));
     }
 
     @Data

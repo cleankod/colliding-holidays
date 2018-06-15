@@ -5,23 +5,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import cleankod.bs.holiday.core.domain.GetHolidaysRequest;
+import cleankod.bs.holiday.core.domain.GetCollidingHolidaysRequest;
 import cleankod.bs.holiday.core.domain.Holiday;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class HolidayService {
+public class CollidingHolidayService {
 
     private final HolidayPerCountryFetcher holidayPerCountryFetcher;
 
-    List<Holiday> getHolidays(GetHolidaysRequest getHolidaysRequest) {
+    List<Holiday> getHolidaysOnTheSameDayInAllCountries(GetCollidingHolidaysRequest getCollidingHolidaysRequest) {
         Map<String, List<Holiday>> holidays;
-        var actualDate = getHolidaysRequest.getDate();
+        var actualDate = getCollidingHolidaysRequest.getDate();
         do {
-            holidays = holidayPerCountryFetcher.fetchHolidays(getHolidaysRequest, actualDate);
+            holidays = holidayPerCountryFetcher.fetchHolidays(getCollidingHolidaysRequest, actualDate);
             actualDate = actualDate.plusDays(1L);
         }
-        while (holidays.size() < getHolidaysRequest.getCountries().size());
+        while (holidays.size() < getCollidingHolidaysRequest.getCountries().size());
 
         return holidays.entrySet().stream()
                 .map(Map.Entry::getValue)

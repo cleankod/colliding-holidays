@@ -19,7 +19,7 @@ import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
 import cleankod.bs.holiday.core.HolidayForSingleCountryFetcher;
-import cleankod.bs.holiday.core.HolidayService;
+import cleankod.bs.holiday.core.CollidingHolidayService;
 import cleankod.bs.holiday.core.HolidayServiceFactory;
 import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 
@@ -44,7 +44,7 @@ public class Application {
     }
 
     @Bean
-    HolidayService holidayService(HolidayForSingleCountryFetcher holidayForSingleCountryFetcher) {
+    CollidingHolidayService holidayService(HolidayForSingleCountryFetcher holidayForSingleCountryFetcher) {
         return HolidayServiceFactory.create(holidayForSingleCountryFetcher);
     }
 

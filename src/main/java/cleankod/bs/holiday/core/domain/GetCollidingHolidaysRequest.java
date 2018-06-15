@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class GetHolidaysRequest {
+public class GetCollidingHolidaysRequest {
     @NotEmpty(message = "{validation.countries-required}")
     @SupportedCountries
     private final List<String> countries;
