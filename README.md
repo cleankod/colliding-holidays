@@ -127,3 +127,17 @@ Some given parameters may stress the [Holiday API](https://holidayapi.com/) serv
 There are few things still pending for improvement:
 - [ ] the holiday fetching logic may be looking for whole months instead of day-by-day requests, and then find colliding holidays in such results
 - [ ] provide a documentation fot the API ([OpenAPI](https://swagger.io/docs/specification/about/) or [JSON-doc](http://jsondoc.org/)).
+
+## Known issues
+Spring 5 with Java 9+ will emmit the following warnings on build time:
+```
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.springframework.cglib.core.ReflectUtils$1
+    (file:~/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.0.6.RELEASE/*/spring-core-5.0.6.RELEASE.jar)
+    to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of org.springframework.cglib.core.ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+```
+This issue has been already reported and is being tracked as: [SPR-15859](https://jira.spring.io/browse/SPR-15859).
+It does not, however, seem to have any significant impact on the application's runtime.
