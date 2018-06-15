@@ -119,7 +119,9 @@ Package scoped access is used whenever possible to encapsulate the internal clas
 ### Mocking Holiday API in tests
 In order not to stress the actual [Holiday API](https://holidayapi.com/) servers, the mocked responses are used for black-box testing. It also makes the tests complete faster.
 ### Caching Holiday API results
-Some given parameters may stress the [Holiday API](https://holidayapi.com/) servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used. 
+Some given parameters may stress the [Holiday API](https://holidayapi.com/) servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used.
+### Value objects validation
+*Bean Validation* seamed an overkill here, hence the syntactic validation is done in the constructors. Beside keeping it simple, another advantage is that there is no way that an invalid value object would exist in runtime.
 
 ## TODO
 There are few things still pending for improvement:
