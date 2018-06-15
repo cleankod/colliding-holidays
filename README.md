@@ -109,15 +109,15 @@ By default, the application logs into three files:
 
 ## Assumptions and design decisions
 ### Black-box testing
-Black-box testing is mostly used in order to favor refactoring. It is much simpler to completely change the underlying encapsulation of an use case without changing the tests.
+Black-box testing is mostly used in order to favor refactoring. It is much simpler to completely change the underlying encapsulation of an use case without changing the tests. Moreover, the application is tested end-to-end, also with the exposed contract (API).
 ### Spring-less tests
-Only the `BaseMvcSpec` contains Spring-specific stuff. This approach eases the migration to other potential framework or toolset. The whole specification for the project stays the same. Moreover, the application is tested end-to-end, also with the exposed contract (API).
+Only the `BaseMvcSpec` contains Spring-specific stuff. This approach eases the migration to other potential framework or toolset. The whole specification for the project stays the same.
 ### Spring-less modules
 Wherever possible, no Spring-specific stuff was used inside of actual modules (in exception of controllers and the `application` module). This also eases potential framework change.
 ### Package-scoped classes
 Package scoped access is used whenever possible to encapsulate the internal classes of a module. There is only one exception to this rule - the component with cached results. It has to be wrapped in a AOP-proxy in order to enable caching in a painless way. It has to be therefore declared public in order to enable its construction in the main application class.
 ### Mocking Holiday API in tests
-In order not to stress the actual [Holiday API](https://holidayapi.com/) servers, the mocked responses are used for white-box testing. It also makes the tests complete faster.
+In order not to stress the actual [Holiday API](https://holidayapi.com/) servers, the mocked responses are used for black-box testing. It also makes the tests complete faster.
 ### Caching Holiday API results
 Some given parameters may stress the [Holiday API](https://holidayapi.com/) servers too much due to many requests sent in order to find colliding holidays. That is why a caching abstraction with a distributable cache manager are used. 
 
