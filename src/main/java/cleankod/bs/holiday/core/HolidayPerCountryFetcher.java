@@ -15,7 +15,8 @@ class HolidayPerCountryFetcher {
     private final HolidayForSingleCountryFetcher holidayForSingleCountryFetcher;
 
     Map<String, List<Holiday>> fetchHolidays(GetCollidingHolidaysRequest getCollidingHolidaysRequest, LocalDate actualDate) {
-        return getCollidingHolidaysRequest.getCountries().stream()
+        return getCollidingHolidaysRequest.getCountries()
+                .parallelStream()
                 .map(country -> holidayForSingleCountryFetcher.getHolidays(actualDate, country))
                 .flatMap(Collection::stream)
                 .collect(Collectors.groupingBy(Holiday::getCountry));
