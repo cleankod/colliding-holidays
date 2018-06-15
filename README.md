@@ -124,5 +124,4 @@ Some given parameters may stress the [Holiday API](https://holidayapi.com/) serv
 ## TODO
 There are few things still pending for improvement:
 - [ ] the holiday fetching logic may be looking for whole months instead of day-by-day requests, and then find colliding holidays in such results
-- [ ] the code for finding colliding holidays is too procedural
 - [ ] provide a documentation fot the API ([OpenAPI](https://swagger.io/docs/specification/about/) or [JSON-doc](http://jsondoc.org/)).
