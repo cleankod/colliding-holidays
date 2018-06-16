@@ -10,13 +10,13 @@ class HolidaySpec extends BaseMvcSpec {
     @Unroll
     def "should return a list of next colliding holidays for #countries, #date"() {
         when:
-        def response = get("/holidays", [countries: countries, date: [date]])
+        def response = get("/colliding-holidays", [countries: countries, date: [date]])
 
         then:
         response.status == 200
 
         and:
-        with(getResponseAs(response, HolidayController.HolidayWrapper), {
+        with(getResponseAs(response, CollidingHolidayController.HolidayWrapper), {
             it.holidays.collect { it.name } == names
         })
 
@@ -36,7 +36,7 @@ class HolidaySpec extends BaseMvcSpec {
         def givenCountries = ["PL", "NO", "ES", "US"]
 
         when:
-        def response = get("/holidays", [countries: givenCountries, date: ["2015-12-28"]])
+        def response = get("/colliding-holidays", [countries: givenCountries, date: ["2015-12-28"]])
 
         then:
         response.status == 422
@@ -52,7 +52,7 @@ class HolidaySpec extends BaseMvcSpec {
     @Unroll
     def "should not return since unsupported date #givenDate"() {
         when:
-        def response = get("/holidays", [countries: ["PL"], date: [givenDate]])
+        def response = get("/colliding-holidays", [countries: ["PL"], date: [givenDate]])
 
         then:
         response.status == 422
@@ -70,7 +70,7 @@ class HolidaySpec extends BaseMvcSpec {
 
     def "should not return since required parameters not given"() {
         when:
-        def response = get("/holidays")
+        def response = get("/colliding-holidays")
 
         then:
         response.status == 422

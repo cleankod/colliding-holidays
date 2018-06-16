@@ -15,9 +15,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/holidays")
+@RequestMapping("/colliding-holidays")
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
-class HolidayController {
+class CollidingHolidayController {
 
     private final CollidingHolidayService collidingHolidayService;
 

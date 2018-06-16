@@ -44,7 +44,7 @@ build/libs/bs-holidays.jar
 ## API usage
 ### Get colliding holidays
 Endpoint:
-* `GET /holidays`
+* `GET /colliding-holidays`
 
 Parameters:
 * `date` (**required**) - start the lookup from this day on
@@ -52,7 +52,7 @@ Parameters:
 
 Sample request:
 ```
-http://localhost:8080/holidays?date=2017-12-03&countries=PL&countries=NO
+http://localhost:8080/colliding-holidays?date=2017-12-03&countries=PL&countries=NO
 ```
 
 Will produce:
