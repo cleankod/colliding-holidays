@@ -77,7 +77,7 @@ Which means that starting from `2017-12-03` the first colliding holiday for Pola
 
 ### Get supported countries
 Endpoint:
-* `GET /countries`
+* `GET /supported-countries`
 
 Returns a list of countries supported by the application.
 

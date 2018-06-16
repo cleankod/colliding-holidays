@@ -7,7 +7,7 @@ class CountrySpec extends BaseMvcSpec {
 
     def "should return supported countries list"() {
         when:
-        def response = get('/countries')
+        def response = get('/supported-countries')
 
         then:
         response.status == 200

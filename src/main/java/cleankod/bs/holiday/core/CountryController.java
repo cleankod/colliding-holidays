@@ -9,7 +9,7 @@ import cleankod.bs.holiday.core.domain.SupportedCountriesWrapper;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("/supported-countries")
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 class CountryController {
 
