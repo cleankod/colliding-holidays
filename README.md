@@ -20,6 +20,11 @@ In order to build the application, simply issue:
 gradle build
 ```
 
+In order to build a Docker image issue:
+```bash
+gradle docker
+```
+
 ### Running the application
 #### Using Gradle
 ```bash
@@ -34,6 +39,13 @@ The resulting artifact is an executable file so it can be run like any other bin
 ```bash
 build/libs/bs-holidays.jar
 ```
+
+#### Using Docker
+After building the docker image start the application by issuing:
+```bash
+docker run -p 8080:8080 -v `pwd`/logs:/logs cleankod/bs-holidays
+```
+The application is going to be available on port `8080` and its logs are going to be available in `./logs` directory.
 
 ## Configuration
 * `application.supported-countries` - coma separated list of countries supported for colliding holidays lookup.

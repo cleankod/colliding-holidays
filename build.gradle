@@ -5,11 +5,12 @@ plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.9.1'
     id 'org.springframework.boot' version '2.0.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.5.RELEASE'
+    id 'com.palantir.docker' version '0.19.2'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_10
 targetCompatibility = JavaVersion.VERSION_1_10
-group = 'cleankod.bs.holiday'
+group = 'cleankod'
 
 apply from: rootProject.file('gradle/processResources.gradle')
 
@@ -52,3 +53,10 @@ jacocoTestReport {
     }
 }
 check.dependsOn jacocoTestReport
+
+docker {
+    dependsOn build
+    name "${project.group}/${bootJar.baseName}"
+    files bootJar.archivePath
+    buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+}
