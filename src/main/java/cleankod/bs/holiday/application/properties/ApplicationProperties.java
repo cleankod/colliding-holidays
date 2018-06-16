@@ -26,5 +26,6 @@ public class ApplicationProperties {
     public static class HolidayApi {
         @NotBlank private String key;
         @NotBlank private String baseUrl;
+        @NotBlank private String timeoutDuration;
     }
 }

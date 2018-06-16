@@ -1,21 +1,29 @@
 package cleankod.bs.holiday.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netflix.config.ConfigurationManager;
 
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
-import feign.Feign;
+import cleankod.bs.holiday.client.domain.Timeout;
 import feign.Logger;
 import feign.error.AnnotationErrorDecoder;
+import feign.hystrix.HystrixFeign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 
 public class HolidayClientFactory {
-    public static HolidayClient create(ApiKey apiKey, BaseUrl baseUrl, ObjectMapper mapper) {
+
+    private static final String HYSTRIX_TIMEOUT_CONFIGURATION_KEY =
+            "hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds";
+
+    public static HolidayClient create(ApiKey apiKey, BaseUrl baseUrl, Timeout timeout, ObjectMapper mapper) {
         JacksonDecoder decoder = new JacksonDecoder(mapper);
-        return Feign.builder()
+        ConfigurationManager.getConfigInstance()
+                .setProperty(HYSTRIX_TIMEOUT_CONFIGURATION_KEY, timeout.getValue());
+        return HystrixFeign.builder()
                 .client(new OkHttpClient())
                 .encoder(new JacksonEncoder(mapper))
                 .decoder(decoder)

@@ -18,6 +18,7 @@ import cleankod.bs.holiday.client.HolidayClient;
 import cleankod.bs.holiday.client.HolidayClientFactory;
 import cleankod.bs.holiday.client.domain.ApiKey;
 import cleankod.bs.holiday.client.domain.BaseUrl;
+import cleankod.bs.holiday.client.domain.Timeout;
 import cleankod.bs.holiday.core.HolidayForSingleCountryFetcher;
 import cleankod.bs.holiday.core.CollidingHolidayService;
 import cleankod.bs.holiday.core.CollidingHolidayServiceFactory;
@@ -35,7 +36,8 @@ public class Application {
     HolidayClient holidayClient(ApplicationProperties applicationProperties, ObjectMapper mapper) {
         ApiKey apiKey = new ApiKey(applicationProperties.getHolidayApi().getKey());
         BaseUrl baseUrl = new BaseUrl(applicationProperties.getHolidayApi().getBaseUrl());
-        return HolidayClientFactory.create(apiKey, baseUrl, mapper);
+        Timeout timeout = new Timeout(applicationProperties.getHolidayApi().getTimeoutDuration());
+        return HolidayClientFactory.create(apiKey, baseUrl, timeout, mapper);
     }
 
     @Bean

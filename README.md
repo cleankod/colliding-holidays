@@ -40,6 +40,7 @@ build/libs/bs-holidays.jar
 * `application.holiday-api.key` - an API key value for the [Holiday API](https://holidayapi.com/).
 * `application.holiday-api.base-url` - base URL for the [Holiday API](https://holidayapi.com/).
 * `application.only-past-supported` - a `boolean` value that states whether only past dates are supported. Keep in mind though, that when set to `true` the Premium account key for the [Holiday API](https://holidayapi.com/) has to be provided. Otherwise the application will issue an error on each request when present or future dates are given. When set to `false` the application will only allow dates one month before the current one. 
+* `application.holiday-api.timeout-duration` - a client timeout duration in [ISO-8601](https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-) format.
 
 ## API usage
 ### Get colliding holidays
@@ -127,6 +128,7 @@ Some given parameters may stress the [Holiday API](https://holidayapi.com/) serv
 There are few things still pending for improvement:
 - [ ] the holiday fetching logic may be looking for whole months instead of day-by-day requests, and then find colliding holidays in such results
 - [ ] provide a documentation fot the API ([OpenAPI](https://swagger.io/docs/specification/about/) or [JSON-doc](http://jsondoc.org/)).
+- [ ] Hystrix tuning and monitoring tools (ie. for Actuator).
 
 ## Known issues
 Spring 5 with Java 9+ will emmit the following warnings on build time:
