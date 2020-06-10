@@ -126,7 +126,7 @@ Black-box testing is mostly used in order to favor refactoring. It is much simpl
 ### Spring-less tests
 Only the `BaseMvcSpec` contains Spring-specific stuff. This approach eases the migration to other potential framework or toolset. The whole specification for the project stays the same.
 ### Spring-less modules
-Wherever possible, no Spring-specific stuff was used inside of actual modules (in exception of controllers and the `application` module). This also eases potential framework change.
+Wherever possible, no Spring-specific stuff was used inside of actual modules (in exception of controllers and the `application` module). This also eases potential framework change or upgrade. The framework upgrade could also be more seamless for all of those changes that are not backwards compatible because framework specific stuff is kept in one place and the business logic is not polluted.
 ### Package-scoped classes
 Package scoped access is used whenever possible to encapsulate the internal classes of a module. There is only one exception to this rule - the component with cached results. It has to be wrapped in a AOP-proxy in order to enable caching in a painless way. It has to be therefore declared public in order to enable its construction in the main application class.
 ### Mocking Holiday API in tests
